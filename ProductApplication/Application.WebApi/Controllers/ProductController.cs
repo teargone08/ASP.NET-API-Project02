@@ -25,5 +25,32 @@ namespace Application.WebApi.Controllers
             }
             return Ok(product);
         }
+        public IHttpActionResult Post(Product product)
+        {
+          var isSave=  productService.SaveProduct(product);
+          if (isSave==true)
+          {
+              return Ok();
+          }
+          return BadRequest();
+        }
+        public IHttpActionResult Put(Product product)
+        {
+            var isUpdated = productService.UpdateProduct(product.Id, product);
+            if (isUpdated==true)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+        public IHttpActionResult Delete(int id)
+        {
+            var isDeleted = productService.DeleteProduct(id);
+            if (isDeleted==true)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
     }
 }
