@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "WeatherJS";
+}
+
+<h2>WeatherJS</h2>
+<div><label>City:</label> <h3 id="city"></h3> </div><br />
+<div><label>Temperature:</label> <h3 id="temp"></h3> </div><br />
+<div><label>Humidity:</label><h3 id="humidity"></h3> </div><br />
+<button id="submit">Get Weather</button>
+
+<script>
+    $(document).ready(function () {
+        $("button").click(function () {
+            $.get("http://api.openweathermap.org/data/2.5/weather?q=Madison.usa& appid=540f5454a97090f89c35e45e85b5304b&units=imperial", function (response) {
+                console.log(response);
+                $("#city").text(response.name);
+                $("#temp").text(response.main.temp);
+                $("#humidity").text(response.main.humidity);
+            });
+        });
+    });
+
+</script>
+
+@*<div class="col-md-12">
+        <h1>Current Conditions in <span data-bind="text:name"></span></h1>
+    </div>
+
+    <div class="col-md-12">
+        Temperature is <span data-bind="text:main.temp"></span>&deg; F
+    </div>
+
+    <div class="col-md-12" data-bind="weather.description">
+
+    </div>
+
+    <script>
+        var weather = Object();
+        var appid = "Change This To Your APP ID from openweathermap.org";
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.get("http://api.openweathermap.org/data/2.5/weather?q=Cleveland&APPID=" + appid + "&units=imperial", function (response) {
+                    //response
+                    console.log(response);
+                    weather = ko.mapping.fromJS(response);  //populate the weather object
+                    ko.applyBindings(weather);
+
+                });
+            });
+        });
+
+    </script>*@
+

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "WeatherOrNot";
+}
+
+<h2>Weather Or Not</h2>
+<div><label>City:</label> <h3 id="city"></h3> </div><br />
+<div><label>Temperature:</label> <h3 id="temp"></h3> </div><br />
+<div><label>Humidity:</label><h3 id="humidity"></h3> </div><br />
+<button id="submit">Get Weather</button>
+
+<script>
+    $(document).ready(function () {
+        $("button").click(function () {
+            $.get("@Url.Action("GetWeather","Home")", function (response) {
+                console.log(response);
+                $("#city").text(response.name);
+                $("#temp").text(response.main.temp);
+                $("#humidity").text(response.main.humidity);
+            });
+        });
+    });
+</script>
+
+@*<h2>Weather Or Not</h2>
+<div class="col-md-12">
+    <h1>Current Conditions in <span data-bind="text:name"></span></h1>
+</div>
+
+<div class="col-md-12">
+    Temperature is <span data-bind="text:main.temp"></span>&deg; F
+</div>
+
+<script>
+    var weather = Object();
+    $(document).ready(function () {
+            $.get("@Url.Action("GetWeather", "Home")", function (response) {
+                //response
+                console.log(response);
+                weather = ko.mapping.fromJS(response);  //populate the weather object
+                ko.applyBindings(weather);
+            });
+    });
+
+</script>*@
